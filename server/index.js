@@ -15,4 +15,9 @@ const db = mysql.createConnection( {
     database: "words"
 });
 
+db.query("CREATE TABLE IF NOT EXISTS words (id INT PRIMARY KEY AUTO_INCREMENT, word TEXT, definition TEXT, wordSource TEXT, test BOOLEAN)"), (err, result) => {
+    if (err) throw err;
+    res.send("Table created.");
+}
+
 app.listen(PORT, () => console.log(`Running on port ${PORT}`));
