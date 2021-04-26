@@ -20,4 +20,15 @@ db.query("CREATE TABLE IF NOT EXISTS words (id INT PRIMARY KEY AUTO_INCREMENT, w
     res.send("Table created.");
 }
 
+app.post('/create', (req, res) => {
+    const word = req.body.word;
+    const definition = req.body.definition;
+    const source = req.body.source;
+
+    db.query("INSERT INTO words (word, definition, wordSource) VALUES (?, ?, ?)", [word, definition, source], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
 app.listen(PORT, () => console.log(`Running on port ${PORT}`));
